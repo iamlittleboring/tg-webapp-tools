@@ -1,6 +1,6 @@
 {
     "name": "@iamlittleboring/tg-webapp-tools",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A React component library written in TypeScript",
     "type": "module",
     "main": "dist/index.js",
@@ -50,5 +50,9 @@
     },
     "dependencies": {
         "@twa-dev/types": "^8.0.2"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
     }
 }
