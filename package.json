@@ -1,5 +1,5 @@
 {
-    "name": "tg-webapp-tools",
+    "name": "@iamlittleboring/tg-webapp-tools",
     "version": "1.0.0",
     "description": "A React component library written in TypeScript",
     "type": "module",
@@ -38,8 +38,16 @@
         "components",
         "library"
     ],
-    "author": "reshetivskyy",
+    "author": "iamlittleboring",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamlittleboring/tg-webapp-tools.git"
+    },
+    "homepage": "https://github.com/iamlittleboring/tg-webapp-tools#readme",
+    "bugs": {
+        "url": "https://github.com/iamlittleboring/tg-webapp-tools/issues"
+    },
     "dependencies": {
         "@twa-dev/types": "^8.0.2"
     }

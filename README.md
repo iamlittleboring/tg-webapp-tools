@@ -14,10 +14,10 @@ React helpers for working with the Telegram WebApp API.
 ## Installation
 
 ```bash
-npm install tg-webapp-tools @twa-dev/sdk
+npm install @iamlittleboring/tg-webapp-tools @twa-dev/sdk
 ```
 
-This package expects `react`, `react-dom`, and `@twa-dev/sdk` to be installed by the consuming app.
+This package is published to both npm and GitHub Packages. The consuming app also needs `react`, `react-dom`, and `@twa-dev/sdk`.
 
 ## Basic usage
 
@@ -26,7 +26,11 @@ Make sure the Telegram WebApp script is available before rendering your app.
 ```tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { SetupWebApp, WebAppProvider, useReady } from "tg-webapp-tools";
+import {
+    SetupWebApp,
+    WebAppProvider,
+    useReady,
+} from "@iamlittleboring/tg-webapp-tools";
 
 const App = () => {
     const ready = useReady();
@@ -66,6 +70,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 npm run build
 npm run typecheck
 ```
+
+## Publishing
+
+This repository is configured to publish to both npm and GitHub Packages.
+
+- Every push to `main` publishes a snapshot build to both registries with a unique version suffix like `-snapshot.<run>.<attempt>`.
+- Every GitHub Release publishes the exact version from `package.json` to both registries as the stable release.
+
+GitHub repository secrets:
+
+- `NPM_TOKEN` is required for npm publishing.
+- `GITHUB_TOKEN` is provided automatically by GitHub Actions for GitHub Packages.
 
 ## Hook coverage
 
