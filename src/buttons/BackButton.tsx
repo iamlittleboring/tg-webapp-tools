@@ -3,16 +3,21 @@ import { useWebApp } from "../hooks";
 
 export const BackButton: React.FC<{
     onClick: VoidFunction;
-}> = ({ onClick }) => {
+    isVisible?: boolean;
+}> = ({ onClick, isVisible = true }) => {
     const backButton = useWebApp()?.BackButton;
 
     useEffect(() => {
-        backButton?.show();
+        if (isVisible) {
+            backButton?.show();
+        } else {
+            backButton?.hide();
+        }
 
         return () => {
             backButton?.hide();
         };
-    }, [backButton]);
+    }, [backButton, isVisible]);
 
     useEffect(() => {
         if (!onClick) {

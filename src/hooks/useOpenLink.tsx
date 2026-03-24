@@ -6,7 +6,12 @@ const useOpenLink = () => {
 
     return useCallback(
         (url: string, tryInstantView?: boolean) =>
-            webApp?.openLink?.(url, { try_instant_view: tryInstantView }),
+            webApp?.openLink?.(
+                url,
+                typeof tryInstantView === "boolean"
+                    ? { try_instant_view: tryInstantView }
+                    : undefined
+            ),
         [webApp]
     );
 };

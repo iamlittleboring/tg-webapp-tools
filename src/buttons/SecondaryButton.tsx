@@ -38,7 +38,16 @@ export const SecondaryButton: React.FC<{
         return () => {
             secondaryButton?.hide();
         };
-    }, [secondaryButton, color, isActive, text, textColor, hasShineEffect]);
+    }, [
+        secondaryButton,
+        color,
+        isActive,
+        isVisible,
+        position,
+        text,
+        textColor,
+        hasShineEffect,
+    ]);
 
     useEffect(() => {
         if (isProgressVisible) {
@@ -46,8 +55,13 @@ export const SecondaryButton: React.FC<{
             secondaryButton?.disable();
         } else {
             secondaryButton?.hideProgress();
+            if (isActive) {
+                secondaryButton?.enable();
+            } else {
+                secondaryButton?.disable();
+            }
         }
-    }, [secondaryButton, isProgressVisible]);
+    }, [secondaryButton, isActive, isProgressVisible]);
 
     useEffect(() => {
         if (!onClick) {

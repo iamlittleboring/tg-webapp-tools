@@ -9,7 +9,12 @@ const useSetEmojiStatus = () => {
             emojiId: string,
             duration?: number,
             callback?: (isSet: boolean) => unknown
-        ) => webApp?.setEmojiStatus(emojiId, { duration: duration }, callback),
+        ) =>
+            webApp?.setEmojiStatus?.(
+                emojiId,
+                { duration: duration },
+                callback
+            ),
         [webApp]
     );
 };

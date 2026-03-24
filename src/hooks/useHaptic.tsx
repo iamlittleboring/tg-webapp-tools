@@ -7,35 +7,39 @@ const useHaptic = () => {
 
     const impact = {
         light: useCallback(() => {
-            hapticFeedback.impactOccurred("light");
+            hapticFeedback?.impactOccurred("light");
         }, [hapticFeedback]),
         medium: useCallback(() => {
-            hapticFeedback.impactOccurred("medium");
+            hapticFeedback?.impactOccurred("medium");
         }, [hapticFeedback]),
         heavy: useCallback(() => {
-            hapticFeedback.impactOccurred("heavy");
+            hapticFeedback?.impactOccurred("heavy");
         }, [hapticFeedback]),
         rigid: useCallback(() => {
-            hapticFeedback.impactOccurred("rigid");
+            hapticFeedback?.impactOccurred("rigid");
         }, [hapticFeedback]),
         soft: useCallback(() => {
-            hapticFeedback.impactOccurred("soft");
+            hapticFeedback?.impactOccurred("soft");
         }, [hapticFeedback]),
     };
 
     const notification = {
         error: useCallback(() => {
-            hapticFeedback.notificationOccurred("error");
+            hapticFeedback?.notificationOccurred("error");
         }, [hapticFeedback]),
         success: useCallback(() => {
-            hapticFeedback.notificationOccurred("success");
+            hapticFeedback?.notificationOccurred("success");
         }, [hapticFeedback]),
         warning: useCallback(() => {
-            hapticFeedback.notificationOccurred("warning");
+            hapticFeedback?.notificationOccurred("warning");
         }, [hapticFeedback]),
     };
 
-    return { impact, notification };
+    const selection = useCallback(() => {
+        hapticFeedback?.selectionChanged();
+    }, [hapticFeedback]);
+
+    return { impact, notification, selection };
 };
 
 export default useHaptic;

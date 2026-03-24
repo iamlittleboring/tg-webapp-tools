@@ -35,7 +35,7 @@ export const MainButton: React.FC<{
         return () => {
             mainButton?.hide();
         };
-    }, [mainButton, color, isActive, text, textColor, hasShineEffect]);
+    }, [mainButton, color, isActive, isVisible, text, textColor, hasShineEffect]);
 
     useEffect(() => {
         if (isProgressVisible) {
@@ -43,8 +43,13 @@ export const MainButton: React.FC<{
             mainButton?.disable();
         } else {
             mainButton?.hideProgress();
+            if (isActive) {
+                mainButton?.enable();
+            } else {
+                mainButton?.disable();
+            }
         }
-    }, [mainButton, isProgressVisible]);
+    }, [mainButton, isActive, isProgressVisible]);
 
     useEffect(() => {
         mainButton?.onClick(onClick);

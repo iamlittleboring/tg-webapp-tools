@@ -2,19 +2,30 @@
     "name": "tg-webapp-tools",
     "version": "1.0.0",
     "description": "A React component library written in TypeScript",
+    "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
+        }
+    },
+    "sideEffects": false,
     "files": [
         "dist"
     ],
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "typecheck": "tsc --noEmit",
+        "prepublishOnly": "npm run build"
     },
     "peerDependencies": {
         "react": "^18.0.0",
         "react-dom": "^18.0.0",
-        "@twa-dev/sdk": "latest"
+        "@twa-dev/sdk": "^8.0.0"
     },
     "devDependencies": {
         "@types/react": "^18.0.0",

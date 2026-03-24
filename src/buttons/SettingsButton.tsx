@@ -3,16 +3,21 @@ import { useWebApp } from "../hooks";
 
 export const SettingsButton: React.FC<{
     onClick: VoidFunction;
-}> = ({ onClick }) => {
+    isVisible?: boolean;
+}> = ({ onClick, isVisible = true }) => {
     const settingsButton = useWebApp()?.SettingsButton;
 
     useEffect(() => {
-        settingsButton?.show();
+        if (isVisible) {
+            settingsButton?.show();
+        } else {
+            settingsButton?.hide();
+        }
 
         return () => {
             settingsButton?.hide();
         };
-    }, [settingsButton]);
+    }, [isVisible, settingsButton]);
 
     useEffect(() => {
         if (!onClick) {

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import useWebApp from "./useWebApp";
 import { RequestContactResponse } from "@twa-dev/types";
 
-const useReadyContact = () => {
+const useRequestContact = () => {
     const webApp = useWebApp();
 
     return useCallback(
@@ -16,4 +16,4 @@ const useReadyContact = () => {
     );
 };
 
-export default useReadyContact;
+export default useRequestContact;

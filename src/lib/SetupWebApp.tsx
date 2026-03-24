@@ -12,7 +12,7 @@ export const SetupWebApp: React.FC<{
         webApp?.setBackgroundColor?.(backgroundColor);
         webApp?.setHeaderColor?.(headerColor);
         webApp?.setBottomBarColor?.(bottomBarColor);
-    }, []);
+    }, [backgroundColor, bottomBarColor, headerColor, webApp]);
 
     return null;
 };

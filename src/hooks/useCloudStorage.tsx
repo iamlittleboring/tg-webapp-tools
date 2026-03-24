@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import useWebApp from "./useWebApp";
+import { createFeatureUnavailableError } from "../utils/webApp";
 
 type CloudStorageKey = string;
 type CloudStorageValue = string;
@@ -21,8 +22,18 @@ export const useCloudStorage = () => {
             fn(resolve);
         });
 
+    const unavailable = <T,>(): Promise<Result<T>> =>
+        Promise.resolve({
+            data: null,
+            error: createFeatureUnavailableError("CloudStorage"),
+        });
+
     const getItem = useCallback(
         async (key: CloudStorageKey): Promise<Result<string>> => {
+            if (!cloudStorage) {
+                return unavailable();
+            }
+
             return wrap((resolve) => {
                 cloudStorage.getItem(key, (err, result) => {
                     if (err) resolve({ data: null, error: new Error(err) });
@@ -38,6 +49,10 @@ export const useCloudStorage = () => {
             key: CloudStorageKey,
             value: CloudStorageValue
         ): Promise<Result<boolean>> => {
+            if (!cloudStorage) {
+                return unavailable();
+            }
+
             return wrap((resolve) => {
                 cloudStorage.setItem(key, value, (err, result) => {
                     if (err) resolve({ data: null, error: new Error(err) });
@@ -51,6 +66,10 @@ export const useCloudStorage = () => {
     const getKeys = useCallback(async (): Promise<
         Result<CloudStorageKey[]>
     > => {
+        if (!cloudStorage) {
+            return unavailable();
+        }
+
         return wrap((resolve) => {
             cloudStorage.getKeys((err, result) => {
                 if (err) resolve({ data: null, error: new Error(err) });
@@ -61,6 +80,10 @@ export const useCloudStorage = () => {
 
     const getItems = useCallback(
         async (keys: CloudStorageKey[]): Promise<Result<CloudStorageItems>> => {
+            if (!cloudStorage) {
+                return unavailable();
+            }
+
             return wrap((resolve) => {
                 cloudStorage.getItems(keys, (err, result) => {
                     if (err) resolve({ data: null, error: new Error(err) });
@@ -73,6 +96,10 @@ export const useCloudStorage = () => {
 
     const removeItem = useCallback(
         async (key: CloudStorageKey): Promise<Result<boolean>> => {
+            if (!cloudStorage) {
+                return unavailable();
+            }
+
             return wrap((resolve) => {
                 cloudStorage.removeItem(key, (err, result) => {
                     if (err) resolve({ data: null, error: new Error(err) });
@@ -85,6 +112,10 @@ export const useCloudStorage = () => {
 
     const removeItems = useCallback(
         async (keys: CloudStorageKey[]): Promise<Result<boolean>> => {
+            if (!cloudStorage) {
+                return unavailable();
+            }
+
             return wrap((resolve) => {
                 cloudStorage.removeItems(keys, (err, result) => {
                     if (err) resolve({ data: null, error: new Error(err) });
