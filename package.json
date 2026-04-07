@@ -1,11 +1,11 @@
 {
     "name": "@iamlittleboring/tg-webapp-tools",
-    "version": "1.0.1",
-    "description": "A React component library written in TypeScript",
+    "version": "1.0.2",
+    "description": "React utilities and components for Telegram Web Apps",
     "type": "module",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
@@ -23,20 +23,25 @@
         "prepublishOnly": "npm run build"
     },
     "peerDependencies": {
-        "react": "^18.0.0",
-        "react-dom": "^18.0.0",
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0",
         "@twa-dev/sdk": "^8.0.0"
     },
     "devDependencies": {
-        "@types/react": "^18.0.0",
-        "@types/react-dom": "^18.0.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@twa-dev/types": "^8.0.2",
         "typescript": "^5.0.0"
     },
     "keywords": [
+        "telegram",
+        "telegram-webapp",
+        "telegram-web-app",
+        "twa",
         "react",
         "typescript",
-        "components",
-        "library"
+        "webapp",
+        "sdk"
     ],
     "author": "iamlittleboring",
     "license": "MIT",
@@ -47,9 +52,6 @@
     "homepage": "https://github.com/iamlittleboring/tg-webapp-tools#readme",
     "bugs": {
         "url": "https://github.com/iamlittleboring/tg-webapp-tools/issues"
-    },
-    "dependencies": {
-        "@twa-dev/types": "^8.0.2"
     },
     "publishConfig": {
         "access": "public",
