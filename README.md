@@ -64,23 +64,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 - Some Telegram features are optional and may not exist on every client version. Hooks in this package now guard against missing APIs where possible.
 - `useDownloadFile` throws a descriptive error if the Telegram client does not expose `downloadFile`, so it is best used after a capability check in the consuming app.
 
-## Development
-
-```bash
-npm run build
-npm run typecheck
-```
-
-## Publishing
-
-This repository is configured for standard npm publishing.
-
-1. Update the version in `package.json`.
-2. Run `npm login`.
-3. Run `npm publish`.
-
-This package uses a scoped npm name, so `publishConfig.access` is already set to `public`.
-
 ## Hook coverage
 
 The package now includes wrappers for:
