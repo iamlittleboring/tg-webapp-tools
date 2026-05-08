@@ -25,7 +25,9 @@
     "peerDependencies": {
         "react": "^18.0.0 || ^19.0.0",
         "react-dom": "^18.0.0 || ^19.0.0",
-        "@twa-dev/sdk": "^8.0.0"
+    },
+    "dependencies": {
+        "@twa-dev/types": "^8.0.2"
     },
     "devDependencies": {
         "@types/react": "^19.0.0",
@@ -47,7 +49,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/iamlittleboring/tg-webapp-tools.git"
+        "url": "https://github.com/iamlittleboring/tg-webapp-tools.git"
     },
     "homepage": "https://github.com/iamlittleboring/tg-webapp-tools#readme",
     "bugs": {
