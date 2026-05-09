@@ -36,6 +36,7 @@ export {
     useShowPopup,
     useSwitchInlineQuery,
     useThemeParams,
+    useValidateInitData,
     useVerticalSwipes,
     useViewport,
     useWebApp,

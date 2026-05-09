@@ -11,6 +11,19 @@ interface Result<T> {
     error: Error | null;
 }
 
+/**
+ * Returns promise-based helpers for Telegram CloudStorage.
+ *
+ * Each helper resolves to `{ data, error }` instead of using Telegram callbacks.
+ *
+ * @example
+ * ```tsx
+ * const cloudStorage = useCloudStorage();
+ * const result = await cloudStorage.getItem("theme");
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#cloudstorage
+ */
 export const useCloudStorage = () => {
     const webApp = useWebApp();
     const cloudStorage = webApp?.CloudStorage;

@@ -2,6 +2,18 @@ import { useEffect } from "react";
 import { EventNames, EventParams } from "@twa-dev/types";
 import useWebApp from "./useWebApp";
 
+/**
+ * Subscribes to a Telegram WebApp event and automatically unsubscribes on cleanup.
+ *
+ * @example
+ * ```tsx
+ * useWebAppEvent("themeChanged", () => {
+ *   console.log("Theme changed");
+ * });
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#events-available-for-mini-apps
+ */
 const useWebAppEvent = <T extends EventNames>(
     eventName: T,
     callback?: (params: EventParams[T]) => unknown

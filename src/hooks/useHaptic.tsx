@@ -1,6 +1,18 @@
 import { useCallback } from "react";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns helpers for Telegram native haptic feedback.
+ *
+ * @example
+ * ```tsx
+ * const haptic = useHaptic();
+ * haptic.impact.medium();
+ * haptic.notification.success();
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#hapticfeedback
+ */
 const useHaptic = () => {
     const webApp = useWebApp();
     const hapticFeedback = webApp?.HapticFeedback;

@@ -1,6 +1,17 @@
 import { useCallback } from "react";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns helpers for enabling or disabling vertical swipe gestures.
+ *
+ * @example
+ * ```tsx
+ * const verticalSwipes = useVerticalSwipes();
+ * verticalSwipes.setEnabled(false);
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#initializing-mini-apps
+ */
 const useVerticalSwipes = () => {
     const webApp = useWebApp();
 

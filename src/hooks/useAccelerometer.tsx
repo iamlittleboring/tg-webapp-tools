@@ -2,6 +2,17 @@ import { useCallback } from "react";
 import { AccelerometerStartParams } from "@twa-dev/types";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns the Telegram Accelerometer instance and start/stop helpers.
+ *
+ * @example
+ * ```tsx
+ * const accelerometer = useAccelerometer();
+ * accelerometer.start({ refresh_rate: 1000 });
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#accelerometer
+ */
 const useAccelerometer = () => {
     const accelerometer = useWebApp()?.Accelerometer;
 

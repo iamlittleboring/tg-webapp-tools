@@ -35,6 +35,7 @@ export { default as useShowConfirm } from "./useShowConfirm";
 export { default as useShowPopup } from "./useShowPopup";
 export { default as useSwitchInlineQuery } from "./useSwitchInlineQuery";
 export { default as useThemeParams } from "./useThemeParams";
+export { default as useValidateInitData } from "./useValidateInitData";
 export { default as useVerticalSwipes } from "./useVerticalSwipes";
 export { default as useViewport } from "./useViewport";
 export { default as useWebAppEvent } from "./useWebAppEvent";

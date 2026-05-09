@@ -1,6 +1,17 @@
 import { useCallback } from "react";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns helpers for locking and unlocking the Mini App orientation.
+ *
+ * @example
+ * ```tsx
+ * const orientationLock = useOrientationLock();
+ * orientationLock.lock();
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#initializing-mini-apps
+ */
 const useOrientationLock = () => {
     const webApp = useWebApp();
 

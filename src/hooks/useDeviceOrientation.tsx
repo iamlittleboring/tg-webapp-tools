@@ -2,6 +2,17 @@ import { useCallback } from "react";
 import { DeviceOrientationStartParams } from "@twa-dev/types";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns the Telegram DeviceOrientation instance and start/stop helpers.
+ *
+ * @example
+ * ```tsx
+ * const deviceOrientation = useDeviceOrientation();
+ * deviceOrientation.start({ refresh_rate: 1000 });
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#deviceorientation
+ */
 const useDeviceOrientation = () => {
     const deviceOrientation = useWebApp()?.DeviceOrientation;
 

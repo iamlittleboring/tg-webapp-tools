@@ -68,7 +68,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 The package now includes wrappers for:
 
-- app lifecycle and state: `useReady`, `useWebAppEvent`, `useViewport`, `useInitData`, `useThemeParams`, `useSafeAreaInsets`
+- app lifecycle and state: `useReady`, `useWebAppEvent`, `useViewport`, `useInitData`, `useValidateInitData`, `useThemeParams`, `useSafeAreaInsets`
 - user prompts and system UI: `useShowAlert`, `useShowConfirm`, `useShowPopup`, `useScanQrPopup`, `useReadTextFromClipboard`
 - navigation and sharing: `useOpenLink`, `useOpenTelegramLink`, `useSwitchInlineQuery`, `useSendData`, `useShareToStory`, `useShareMessage`
 - permissions and device features: `useRequestContact`, `useRequestWriteAccess`, `useRequestEmojiStatusAccess`, `useHomeScreen`, `useClosingConfirmation`, `useVerticalSwipes`, `useFullscreen`, `useOrientationLock`

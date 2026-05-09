@@ -1,6 +1,17 @@
 import { useCallback } from "react";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns helpers for enabling or disabling Telegram's closing confirmation.
+ *
+ * @example
+ * ```tsx
+ * const closingConfirmation = useClosingConfirmation();
+ * closingConfirmation.setEnabled(hasUnsavedChanges);
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#initializing-mini-apps
+ */
 const useClosingConfirmation = () => {
     const webApp = useWebApp();
 

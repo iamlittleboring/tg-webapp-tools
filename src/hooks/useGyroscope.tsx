@@ -2,6 +2,17 @@ import { useCallback } from "react";
 import { GyroscopeStartParams } from "@twa-dev/types";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns the Telegram Gyroscope instance and start/stop helpers.
+ *
+ * @example
+ * ```tsx
+ * const gyroscope = useGyroscope();
+ * gyroscope.start({ refresh_rate: 1000 });
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#gyroscope
+ */
 const useGyroscope = () => {
     const gyroscope = useWebApp()?.Gyroscope;
 

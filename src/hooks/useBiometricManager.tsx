@@ -5,6 +5,17 @@ import {
 } from "@twa-dev/types";
 import useWebApp from "./useWebApp";
 
+/**
+ * Returns the Telegram BiometricManager instance and helper callbacks.
+ *
+ * @example
+ * ```tsx
+ * const biometric = useBiometricManager();
+ * biometric.init(() => biometric.openSettings());
+ * ```
+ *
+ * @see https://core.telegram.org/bots/webapps#biometricmanager
+ */
 const useBiometricManager = () => {
     const biometricManager = useWebApp()?.BiometricManager;
 
