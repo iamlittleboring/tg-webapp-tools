@@ -51,7 +51,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/iamlittleboring/tg-webapp-tools.git"
+        "url": "git+https://github.com/iamlittleboring/tg-webapp-tools.git"
     },
     "homepage": "https://github.com/iamlittleboring/tg-webapp-tools#readme",
     "bugs": {
