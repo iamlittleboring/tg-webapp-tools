@@ -1,6 +1,6 @@
 {
     "name": "@iamlittleboring/tg-webapp-tools",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "description": "React utilities and components for Telegram Web Apps",
     "type": "module",
     "main": "./dist/index.js",
