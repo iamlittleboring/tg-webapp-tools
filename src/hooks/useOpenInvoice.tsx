@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import useWebApp from "./useWebApp";
-import { InvoiceStatuses } from "@twa-dev/types";
+import { InvoiceStatus } from "../types/telegram";
 
 /**
  * Returns a callback that opens a Telegram invoice and reports its payment status.
@@ -17,7 +17,7 @@ const useOpenInvoice = () => {
     const webApp = useWebApp();
 
     return useCallback(
-        (url: string, callback?: (status: InvoiceStatuses) => unknown) =>
+        (url: string, callback?: (status: InvoiceStatus) => unknown) =>
             webApp?.openInvoice?.(url, callback),
         [webApp]
     );

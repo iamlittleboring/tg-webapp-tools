@@ -9,6 +9,8 @@ export const MainButton: React.FC<{
     isVisible?: boolean;
     isProgressVisible?: boolean;
     hasShineEffect?: boolean;
+    /** Bot API 9.5+ */
+    iconCustomEmojiId?: string;
     onClick: VoidFunction;
 }> = ({
     text,
@@ -18,24 +20,37 @@ export const MainButton: React.FC<{
     isVisible = true,
     isProgressVisible = false,
     hasShineEffect = false,
+    iconCustomEmojiId,
     onClick = () => {},
 }) => {
     const mainButton = useWebApp()?.MainButton;
 
     useEffect(() => {
-        mainButton?.setParams({
+        const params = {
             text: text,
             color: color,
             text_color: textColor,
             is_active: isActive,
             is_visible: isVisible,
             has_shine_effect: hasShineEffect,
-        });
+            icon_custom_emoji_id: iconCustomEmojiId,
+        };
+
+        mainButton?.setParams(params);
 
         return () => {
             mainButton?.hide();
         };
-    }, [mainButton, color, isActive, isVisible, text, textColor, hasShineEffect]);
+    }, [
+        mainButton,
+        color,
+        isActive,
+        isVisible,
+        text,
+        textColor,
+        hasShineEffect,
+        iconCustomEmojiId,
+    ]);
 
     useEffect(() => {
         if (isProgressVisible) {

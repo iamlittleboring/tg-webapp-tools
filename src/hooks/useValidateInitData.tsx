@@ -6,36 +6,28 @@ type ValidateInitDataResult<T> = {
     error: Error | null;
 };
 
-type ValidateInitDataRequestOptions = {
-    endpoint?: string;
-    requestInit?: RequestInit;
-};
-
-const DEFAULT_ENDPOINT = "/telegram/getData";
-
-const getEndpointUrl = (baseUrl: string, endpoint = DEFAULT_ENDPOINT) => {
-    const normalizedBaseUrl = /^(https?:)?\/\//.test(baseUrl)
-        ? baseUrl
-        : `https://${baseUrl}`;
-    const url = new URL(normalizedBaseUrl);
-    const basePath = url.pathname.replace(/\/+$/, "");
-    const endpointPath = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-
-    url.pathname = `${basePath}${endpointPath}`;
-
-    return url.toString();
-};
+type InitDataValidator<T> = (initData: string) => Promise<T>;
 
 /**
- * Returns a callback that sends Telegram `initData` to your backend for validation and JSON decoding.
+ * Returns a callback that verifies Telegram `initData` against your own backend
+ * (or any custom validator), and resolves to `{ data, error }` instead of throwing.
  *
- * The callback appends `/telegram/getData` to the passed base URL and sends the raw
- * `Telegram.WebApp.initData` value in a JSON POST body.
+ * Pass a URL to POST `{ initData }` to, or pass your own async function for full
+ * control over the request (or for local/dev-only checks — see README for a
+ * mock-validator recipe).
  *
  * @example
  * ```tsx
  * const validateInitData = useValidateInitData();
- * const result = await validateInitData("https://backend.com");
+ * const { data, error } = await validateInitData("https://backend.com/api/verify-telegram");
+ * ```
+ *
+ * @example Custom validator
+ * ```tsx
+ * const { data, error } = await validateInitData(async (initData) => {
+ *   const res = await myApiClient.verifyTelegram(initData);
+ *   return res.user;
+ * });
  * ```
  *
  * @example FastAPI backend
@@ -50,8 +42,8 @@ const getEndpointUrl = (baseUrl: string, endpoint = DEFAULT_ENDPOINT) => {
  * app = FastAPI()
  * BOT_TOKEN = "123456:ABC-DEF"
  *
- * @app.post("/telegram/getData")
- * async def get_telegram_data(request: Request):
+ * @app.post("/api/verify-telegram")
+ * async def verify_telegram(request: Request):
  *     data = dict(parse_qsl((await request.json())["initData"]))
  *     received_hash = data.pop("hash", "")
  *     check_string = "\n".join(f"{k}={v}" for k, v in sorted(data.items()))
@@ -65,7 +57,7 @@ const getEndpointUrl = (baseUrl: string, endpoint = DEFAULT_ENDPOINT) => {
  *         if key in data:
  *             data[key] = json.loads(data[key])
  *
- *     return data
+ *     return {"user": data.get("user")}
  * ```
  *
  * @see https://core.telegram.org/bots/webapps#validating-data-received-via-the-mini-app
@@ -75,8 +67,7 @@ const useValidateInitData = <T = unknown>() => {
 
     return useCallback(
         async (
-            baseUrl: string,
-            options: ValidateInitDataRequestOptions = {}
+            target: string | InitDataValidator<T>
         ): Promise<ValidateInitDataResult<T>> => {
             try {
                 const initData = webApp?.initData ?? "";
@@ -85,22 +76,15 @@ const useValidateInitData = <T = unknown>() => {
                     throw new Error("Telegram initData is unavailable.");
                 }
 
-                const requestInit = options.requestInit ?? {};
-                const headers = new Headers(requestInit.headers);
-
-                if (!headers.has("Content-Type")) {
-                    headers.set("Content-Type", "application/json");
+                if (typeof target === "function") {
+                    return { data: await target(initData), error: null };
                 }
 
-                const response = await fetch(
-                    getEndpointUrl(baseUrl, options.endpoint),
-                    {
-                        ...requestInit,
-                        method: "POST",
-                        headers,
-                        body: requestInit.body ?? JSON.stringify({ initData }),
-                    }
-                );
+                const response = await fetch(target, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ initData }),
+                });
 
                 if (!response.ok) {
                     throw new Error(

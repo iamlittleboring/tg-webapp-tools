@@ -1,8 +1,13 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useWebApp from "./useWebApp";
 
 /**
- * Returns helpers for enabling or disabling Telegram's closing confirmation.
+ * Returns helpers for enabling or disabling Telegram's closing confirmation,
+ * plus the current `isEnabled` value.
+ *
+ * Telegram does not emit an event when this setting changes, so `isEnabled` is read on
+ * mount and then updated optimistically whenever `enable`/`disable`/`setEnabled` are
+ * called through this hook — it will not reflect changes made outside of it.
  *
  * @example
  * ```tsx
@@ -14,16 +19,23 @@ import useWebApp from "./useWebApp";
  */
 const useClosingConfirmation = () => {
     const webApp = useWebApp();
-
-    const enable = useCallback(
-        () => webApp?.enableClosingConfirmation?.(),
-        [webApp]
+    const [isEnabled, setIsEnabled] = useState(
+        () => webApp?.isClosingConfirmationEnabled ?? false
     );
 
-    const disable = useCallback(
-        () => webApp?.disableClosingConfirmation?.(),
-        [webApp]
-    );
+    useEffect(() => {
+        setIsEnabled(webApp?.isClosingConfirmationEnabled ?? false);
+    }, [webApp]);
+
+    const enable = useCallback(() => {
+        webApp?.enableClosingConfirmation?.();
+        setIsEnabled(true);
+    }, [webApp]);
+
+    const disable = useCallback(() => {
+        webApp?.disableClosingConfirmation?.();
+        setIsEnabled(false);
+    }, [webApp]);
 
     const setEnabled = useCallback(
         (enabled: boolean) => {
@@ -32,11 +44,12 @@ const useClosingConfirmation = () => {
             } else {
                 webApp?.disableClosingConfirmation?.();
             }
+            setIsEnabled(enabled);
         },
         [webApp]
     );
 
-    return { enable, disable, setEnabled };
+    return { enable, disable, setEnabled, isEnabled };
 };
 
 export default useClosingConfirmation;

@@ -10,6 +10,8 @@ export const SecondaryButton: React.FC<{
     isVisible?: boolean;
     isProgressVisible?: boolean;
     hasShineEffect?: boolean;
+    /** Bot API 9.5+ */
+    iconCustomEmojiId?: string;
     onClick: VoidFunction;
 }> = ({
     text,
@@ -20,12 +22,13 @@ export const SecondaryButton: React.FC<{
     isVisible = true,
     isProgressVisible = false,
     hasShineEffect = false,
+    iconCustomEmojiId,
     onClick = () => {},
 }) => {
     const secondaryButton = useWebApp()?.SecondaryButton;
 
     useEffect(() => {
-        secondaryButton?.setParams({
+        const params = {
             text: text,
             color: color,
             text_color: textColor,
@@ -33,7 +36,10 @@ export const SecondaryButton: React.FC<{
             is_active: isActive,
             is_visible: isVisible,
             has_shine_effect: hasShineEffect,
-        });
+            icon_custom_emoji_id: iconCustomEmojiId,
+        };
+
+        secondaryButton?.setParams(params);
 
         return () => {
             secondaryButton?.hide();
@@ -47,6 +53,7 @@ export const SecondaryButton: React.FC<{
         text,
         textColor,
         hasShineEffect,
+        iconCustomEmojiId,
     ]);
 
     useEffect(() => {

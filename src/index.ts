@@ -1,40 +1,39 @@
+import "./types/telegram";
+
 export { WebAppProvider } from "./provider";
 
 export {
     useAddToHomeScreen,
     useAccelerometer,
     useBiometricManager,
+    useBottomBarColor,
     useClosingConfirmation,
     useClose,
     useCloudStorage,
     useDeviceOrientation,
+    useDeviceStorage,
     useDownloadFile,
     useExpand,
     useFullscreen,
     useGyroscope,
     useHaptic,
+    useHideKeyboard,
     useHomeScreen,
     useInitData,
+    useIsVersionAtLeast,
     useLocationManager,
     useOpenInvoice,
-    useOpenLink,
-    useOpenTelegramLink,
     useOrientationLock,
+    usePermissions,
+    usePopups,
     useReady,
     useReadTextFromClipboard,
-    useRequestContact,
-    useRequestEmojiStatusAccess,
-    useRequestWriteAccess,
     useSafeAreaInsets,
     useScanQrPopup,
+    useSecureStorage,
     useSendData,
     useSetEmojiStatus,
-    useShareMessage,
-    useShareToStory,
-    useShowAlert,
-    useShowConfirm,
-    useShowPopup,
-    useSwitchInlineQuery,
+    useSharing,
     useThemeParams,
     useValidateInitData,
     useVerticalSwipes,
@@ -51,3 +50,7 @@ export {
 } from "./buttons";
 
 export { SetupWebApp } from "./lib";
+
+export { isVersionAtLeast } from "./utils/version";
+
+export type { InvoiceStatus } from "./types/telegram";
