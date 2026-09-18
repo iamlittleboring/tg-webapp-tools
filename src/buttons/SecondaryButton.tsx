@@ -28,6 +28,9 @@ export const SecondaryButton: React.FC<{
     const secondaryButton = useWebApp()?.SecondaryButton;
 
     useEffect(() => {
+        // Assigned to a variable (not passed inline) so TS structural typing allows the
+        // extra icon_custom_emoji_id field without excess-property-check errors against
+        // @twa-dev/types' stale, unexported BottomButtonParams shape.
         const params = {
             text: text,
             color: color,
